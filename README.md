@@ -10,6 +10,13 @@
 
 This is a Production sample of how a NextJs project should be architected brought to you by "Emmanuel Onah". Feel free to clone it and use it as a base of your next.js projects. Note: Search through the project for "You-Project-Name-Here" and substitute them with your project name.
 
+### Which configurations it comes with:
+
+1. Http services built ontop axios
+2. Design system with styled-component and RadixUI integration
+3. A git-action that runs the unit test on master and PR branches
+4. A git-hooks for local-ci that runs your linters and unit-tests
+
 ## Technologies used
 
 1. [Next.Js](https://nextjs.org/)
