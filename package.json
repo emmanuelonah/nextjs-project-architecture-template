@@ -21,7 +21,7 @@
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@tanstack/react-query": "^4.29.14",
     "axios": "^1.4.0",
-    "next": "13.4.9",
+    "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "^3.39.3",
