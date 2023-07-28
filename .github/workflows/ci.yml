@@ -1,0 +1,26 @@
+name: You-Project-Name-Here-Frontend CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  suite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        # Install packages job
+      - name: Install packages
+        run: yarn install --frozen-lockfile --non-interactive
+        # Eslint job
+      - name: Run ESLint
+        run: yarn run lint
+        # Unit test job
+      - name: Run UnitTest
+        run: yarn run local:ci
