@@ -20,9 +20,7 @@ const isBrowser = typeof window !== 'undefined';
  */
 function stringifyOptions(options: Record<string, any>) {
   return Object.keys(options).reduce((acc, key) => {
-    if (key === 'days') return acc;
-
-    if (options[key] === false) return acc;
+    if (key === 'days' || options[key] === false) return acc;
 
     if (options[key] === true) return `${acc}; ${key}`;
 
