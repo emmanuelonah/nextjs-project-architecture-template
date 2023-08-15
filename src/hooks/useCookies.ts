@@ -10,34 +10,36 @@ interface CookieOptions {
 }
 
 const isBrowser = typeof window !== 'undefined';
+const A_DAY_MILLISECONDS = 864e5;
 
 /**
- * @stringifyOptions used to stringify the setCookies value
- *
- * @param {options: Record<string, any>}
- *
- * @returns string
+ * @stringifyOptions function takes in a `CookieOptions` object and returns a string
+ * representation of the options.
+ * @param {CookieOptions} options - The `options` parameter is an object that contains the following
+ * properties:
+ * @returns a string that represents the options for a cookie.
  */
-function stringifyOptions(options: Record<string, any>) {
-  return Object.keys(options).reduce((acc, key) => {
-    if (key === 'days' || options[key] === false) return acc;
+function stringifyOptions(options: CookieOptions) {
+  let result = '';
 
-    if (options[key] === true) return `${acc}; ${key}`;
+  result += options.path ? `; path=${options.path}` : '';
+  result += options.domain ? `; domain=${options.domain}` : '';
+  result += options.secure ? '; secure' : '';
+  result += options.sameSite ? `; sameSite=${options.sameSite}` : '';
 
-    return `${acc}; ${key}=${options[key]}`;
-  }, '');
+  return result;
 }
 
 /**
- * @setCookie used to set cookies
- *
- * @param {name:string}
- * @param {value:string}
- * @param {options?:CookieOptions}
- *
- * @returns void
+ * @setCookie function sets a cookie with the given name and value, along with optional options.
+ * @param {string} name - The name parameter is a string that represents the name of the cookie. It is
+ * used to identify the cookie when retrieving or deleting it.
+ * @param {string} value - The `value` parameter is a string that represents the value to be stored in
+ * the cookie.
+ * @param {CookieOptions} [options] - The `options` parameter is an optional object that can contain
+ * additional settings for the cookie. It has the following properties:
+ * @returns The function does not have a return statement, so it does not return anything.
  */
-const A_DAY_MILLISECONDS = 864e5;
 function setCookie(name: string, value: string, options?: CookieOptions) {
   if (!isBrowser) return;
 
@@ -47,13 +49,15 @@ function setCookie(name: string, value: string, options?: CookieOptions) {
 }
 
 /**
- * @getCookie used to get cookie from the storage
- *
- * @param {name:string}
- * @param {initialValue?:string}
- *
- * @returns any: it can return an object, string, number
- * because we parse it to its original type
+ * @getCookie function retrieves the value of a cookie with a given name from the browser's
+ * cookies, or returns an initial value if the cookie is not found.
+ * @param {string} name - The `name` parameter is a string that represents the name of the cookie you
+ * want to retrieve.
+ * @param [initialValue] - The `initialValue` parameter is an optional parameter that specifies the
+ * default value to be returned if the cookie with the given name is not found. If no `initialValue` is
+ * provided, it defaults to an empty string (`''`).
+ * @returns the value of the cookie with the specified name if it exists, otherwise it returns the
+ * initial value provided.
  */
 function getCookie(name: string, initialValue = '') {
   if (!isBrowser) return initialValue;
@@ -67,21 +71,27 @@ function getCookie(name: string, initialValue = '') {
 }
 
 /**
- * @deleteCookie used to delete a cookie
- *
- * @param {name:string}
- * @param {path?:string}
+ * @deleteCookie function is used to delete a cookie by setting its expiration date to a past
+ * date.
+ * @param {string} name - The name of the cookie that you want to delete.
+ * @param [path=/] - The `path` parameter is optional and it specifies the path of the cookie. By
+ * default, it is set to `'/'`, which means the cookie is accessible on all pages of the website. If
+ * you want to restrict the cookie to a specific path, you can provide the desired path as a string
  */
 function deleteCookie(name: string, path = '/') {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`;
 }
 
 /**
- * @useCookies used to get and set cookies
- *
- * @param {key:string}
- * @param {initialValue:string}
- * @returns [item, updateItem]
+ * @useCookies function is a custom hook that allows you to manage cookies by
+ * providing methods to update and delete a cookie item.
+ * @param {string} key - The key parameter is a string that represents the name of the cookie. It is
+ * used to identify the cookie when getting, setting, or deleting it.
+ * @param {string} [initialValue] - The `initialValue` parameter is an optional parameter that
+ * specifies the initial value for the cookie. If no initial value is provided, the `getCookie`
+ * function will be called to retrieve the value of the cookie with the specified key.
+ * @returns The function `useCookies` returns an object with three properties: `item`, `updateItem`,
+ * and `deleteItem`.
  */
 function useCookies(key: string, initialValue?: string) {
   const [item, setItem] = useState(() => getCookie(key, initialValue));
@@ -94,9 +104,7 @@ function useCookies(key: string, initialValue?: string) {
     [key]
   );
 
-  const deleteItem = useCallback(() => {
-    deleteCookie(key);
-  }, [key]);
+  const deleteItem = useCallback(() => deleteCookie(key), [key]);
 
   return { item, updateItem, deleteItem };
 }
