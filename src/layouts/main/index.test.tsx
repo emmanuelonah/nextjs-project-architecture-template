@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { Main } from './index';
+import { Main } from './index.util';
 
 describe('<Main/>', () => {
   it('should render component', () => {

@@ -2,12 +2,13 @@ import React from 'react';
 
 import { renderHook, render } from 'utils';
 
-import { createContext } from '.';
+import { createContext } from './index.util';
 
 describe('createContext', () => {
   it('should confirm that createContent returns a context', () => {
     const contextValue = { env: 'test', testTool: 'jest', framework: 'react' };
     const [Provider, useContext] = createContext<typeof contextValue>('TestContext');
+
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <Provider value={contextValue}>{children}</Provider>
     );

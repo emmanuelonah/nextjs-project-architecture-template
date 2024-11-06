@@ -1,4 +1,4 @@
-import { throwError } from '.';
+import { throwError } from './index.util';
 
 const ERROR_CONSTRUCT = {
   name: 'ContextError',

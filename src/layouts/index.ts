@@ -1,1 +1,1 @@
-export { Main } from './main';
+export { Main } from './main/index.util';

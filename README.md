@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/nextjs-architecture">
-    <img src="./src/app/logo.png" alt="logo" width="300" />
+    <img src="./public/logo.png" alt="logo" width="300" />
   </a>
 </div>
 
@@ -12,10 +12,13 @@ This is a Production sample of how a NextJs project should be architected brough
 
 ### Which configurations it comes with:
 
-1. Http services built ontop axios
-2. Design system with styled-component and RadixUI integration
-3. A git-action that runs the unit test on master and PR branches
-4. A git-hooks for local-ci that runs your linters and unit-tests
+1. [Http services built on top axios](./src/services/http-services/index.ts)
+2. [Design system with styled-component and RadixUI integration](./src/design-system/index.ts)
+3. [A git-action that runs the unit test on master and PR branches](/.github/dependabot.yml)
+4. [A git-hooks for local-ci that runs your linters and unit-tests](/.husky/_/husky.sh)
+5. [A global store mechanism. You don't need to bring in `redux`, `mobix`, or any external global state manager](./src/globalstore/index.tsx)
+6. [A PWA integration](/next.config.js)
+7. [A test/mock server using msw](./src/mocks/server.ts)
 
 ## Technologies used
 
@@ -38,6 +41,12 @@ This is a Production sample of how a NextJs project should be architected brough
 9. [Git Action](https://docs.github.com/en/actions)
 
 10. [Storybook](https://storybook.js.org/)
+
+## Host Environments
+
+1. [Production](replace-your-production-host-here)
+2. [Staging](replace-your-staging-host-here)
+3. [Development](http://localhost:3000/)
 
 ## Architecture used
 
@@ -170,3 +179,7 @@ All our design tokens lies inside the styles folder.
 2. __/src/styles/colors:__ this contains our colors.
 
 3. __/src/styles/typography:__ this contains our typographies e.g font-sizes, font-weights, spacing, breakpoints, and everything related to font.
+
+## Enquiry
+
+Incase you have any question or need a suggestion on how to approach your architectural decisions, fee free to write me on [Linkediln](https://www.linkedin.com/in/onah/), i am very much active there and will do my best to assist you with the best practices.

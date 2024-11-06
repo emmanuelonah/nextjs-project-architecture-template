@@ -1,51 +1,65 @@
 /**
- * @About this folder contains the application global state(state shared across the app)
+ * @About Application Global State
  *
- * @Usage all global context should be exposed through this store.
+ * This folder contains the application's global state, which is shared across the entire app.
  *
- * @Note only global context should be exposed through this file meaning,
- * if a context value is needed in a singular parent, then it should be
- * exposed from here. Mind you, this pattern is modular, meaning each context
- * value is a standalone module.
+ * @Usage
+ * All global contexts should be exposed through this store.
  *
- * @Sample
- * ```ts
- *   export function GlobalStore(props: GlobalStorePropTypes) {
- *   const a = useAPresenter(); // this is a separate logical module in its on file
- *   const b = useBPresenter(); // this is a separate logical module in its on file
- *   const c = useCPresenter(); // this is a separate logical module in its on file
- *   const values = React.useMemo<GlobalStoreContextType>(() => ({ a,b,c }), [a,b,c ]);
+ * Note:
+ * Only truly global contexts should be exposed here. If a context is needed
+ * in a single parent component, it should not be included in this global store.
+ * This pattern is modular, with each context value being a standalone module.
  *
- *     return (
- *             <GlobalStoreProvider value={values}>{props.children}</GlobalStoreProvider>;
- *         )
- *     }
+ * @Example
+ * ```typescript
+ * export function GlobalStore({ children }: GlobalStorePropTypes) {
+ *   const a = useAPresenter(); // Separate logical module in its own file that you want to be available globally
+ *   const b = useBPresenter(); // Separate logical module in its own file that you want to be available globally
+ *   const c = useCPresenter(); // Separate logical module in its own file that you want to be available globally
+ *
+ *   const values = React.useMemo<GlobalStoreContextType>(
+ *     () => ({ a, b, c }),
+ *     [a, b, c]
+ *   );
+ *
+ *   return (
+ *     <GlobalStoreProvider value={values}>
+ *       {children}
+ *     </GlobalStoreProvider>
+ *   );
+ * }
+ * ```
+ *
+ * @howToAccessTheGlobalStore
+ *
+ * ```typescript
+ *
+ * import { useGlobalStore } from 'globalstore';
+ *
+ *   const store = useGlobalStore();
  * ```
  */
-import React from 'react';
 
-import { createContext } from 'utils';
+import React, { useMemo } from 'react';
+
 import { OrganisationModel, useOrganisationPresenter } from 'models';
 
-/**
- * Context
- */
+import { createContext } from '../utils/create-context/index.util';
+
 type GlobalStoreContextType = {
   organisation: OrganisationModel;
 };
 
 const [GlobalStoreProvider, useGlobalStore] = createContext<GlobalStoreContextType>('GlobalStoreContext');
 
-/**
- * Component
- */
 type GlobalStorePropTypes = {
   children: React.ReactNode;
 };
 
 function GlobalStore(props: GlobalStorePropTypes) {
   const organisation = useOrganisationPresenter();
-  const values = React.useMemo<GlobalStoreContextType>(() => ({ organisation }), [organisation]);
+  const values = useMemo<GlobalStoreContextType>(() => ({ organisation }), [organisation]);
 
   return <GlobalStoreProvider value={values}>{props.children}</GlobalStoreProvider>;
 }
