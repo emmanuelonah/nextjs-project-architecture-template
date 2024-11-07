@@ -10,13 +10,10 @@ const withPWA = require('next-pwa')({
 module.exports = withPWA({
   reactStrictMode: true,
   swcMinify: true,
-});
-
-module.exports = {
   compiler: {
     styledComponents: true,
   },
   experimental: {
     instrumentationHook: true,
   },
-};
+});

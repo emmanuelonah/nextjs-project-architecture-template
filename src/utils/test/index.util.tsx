@@ -12,7 +12,7 @@ import { ReactQueryProvider } from '../../app/lib/react-query.provider';
 export * from '@testing-library/react';
 
 type WrapperPropTypes = {
-  children: React.ReactElement;
+  children: React.ReactNode;
 };
 
 function Wrapper(props: WrapperPropTypes) {

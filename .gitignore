@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/.yarn
 
 # testing
 /coverage
@@ -11,6 +12,9 @@
 # next.js
 /.next/
 /out/
+
+# service worker
+/.swc
 
 # production
 /build
@@ -25,7 +29,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
+.env.local
+.env.development
+.env.test
+.env.production
 
 # vercel
 .vercel
@@ -35,4 +43,6 @@ yarn-error.log*
 next-env.d.ts
 
 # files
+audit.json
 performance.html
+public/*.js

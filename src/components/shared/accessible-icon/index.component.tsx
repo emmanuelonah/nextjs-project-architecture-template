@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { VisuallyHidden, type VisuallyHiddenElement, type PrimitiveSpanTypes } from '../visually-hidden/index.component';
+import { VisuallyHidden, VisuallyHiddenElement, VisuallyHiddenPropTypes } from '../visually-hidden/index.component';
 
-interface AccessibleIconPropTypes extends PrimitiveSpanTypes {
+interface AccessibleIconPropTypes extends VisuallyHiddenPropTypes {
   label: React.ReactNode;
   children: React.ReactElement;
 }

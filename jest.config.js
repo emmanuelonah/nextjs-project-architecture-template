@@ -1,16 +1,20 @@
-import nextJest from 'next/jest.js';
-
-const createJestConfig = nextJest({ dir: './' });
-
-const config = {
-  setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
-  testEnvironment: 'jest-environment-jsdom',
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
-  transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
-  coverageThreshold: { '<rootDir>/src/**/*.test.@(js|jsx|ts|tsx)': { lines: 85 } },
+module.exports = {
   collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
-  transform: { '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }] },
   moduleNameMapper: {
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^.+\\.(css|sass|scss)$': '<rootDir>/mocks/src/style-mock.js',
+    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/src/mocks/file-mock.js',
+  },
+  setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
+  testEnvironment: 'jsdom',
+  transform: { '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }] },
+  transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
+  moduleNameMapper: {
+    '^react-native$': 'react-native-web',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/src/mocks/file-mock.js',
+    '^.+\\.module\\.(css|sass|scss|less)$': 'identity-obj-proxy',
     '^app': '<rootDir>/src/app/',
     '^test': '<rootDir>/src/test/',
     '^utils': '<rootDir>/src/utils/',
@@ -23,22 +27,26 @@ const config = {
     '^globalstore': '<rootDir>/src/globalstore/',
     '^design-system': '<rootDir>/src/design-system/',
     '^react-native$': 'react-native-web',
-    '^.+\\.module\\.(css|sass|scss|less)$': 'identity-obj-proxy',
-    '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/__mocks__/fileMock.js',
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/mocks/file-mock.js',
   },
   coveragePathIgnorePatterns: [
     './node_modules',
     './.next',
     './.storybook',
     './coverage',
+    '.style.(ts|tsx)$',
+    '.styles.(ts|tsx)$',
     './jest.config.js',
     './next.config.js',
     '.svg.(ts|tsx)$',
     '.stories.(ts|tsx)$',
-    '<rootDir>/public',
+    './public',
+    './src/app',
+    './src/hooks',
+    './src/mocks',
   ],
+  coverageThreshold: {
+    '<rootDir>/src/**/*.test.@(js|jsx|ts|tsx)': {
+      lines: 85,
+    },
+  },
 };
-
-export default createJestConfig(config);

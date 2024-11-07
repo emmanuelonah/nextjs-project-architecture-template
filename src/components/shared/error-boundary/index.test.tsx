@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { throwError } from 'utils';
-
 import { ErrorBoundary } from './index.component';
-import { renderWithOptions, screen, fireEvent, waitFor } from '../../../utils/test/index.util';
+import { renderWithOptions, screen, fireEvent, waitFor, throwError, __IS_BROWSER__ } from '../../../utils';
 
 jest.mock('../../../utils/env/index.util.ts', () => ({
   __DEV__: true,
-  isBrowser: true,
+  __IS_BROWSER__: true,
 }));
 jest.mock('next/image', () => ({
   __esModule: true,

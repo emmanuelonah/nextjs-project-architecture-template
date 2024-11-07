@@ -12,7 +12,6 @@ import { GlobalStore } from 'globalstore';
 import { ErrorBoundary } from 'components';
 import { GlobalStyles, theme } from 'design-system';
 import { StyledComponentsRegistry } from 'app/lib/registry';
-//import { useStartTestServer } from 'mocks/useStartTestServer';
 import { ReactQueryProvider } from 'app/lib/react-query.provider';
 import { HTML_META_KEYWORDS, HTML_META_DESCRIPTION, HTML_TITLE } from 'utils';
 
@@ -25,8 +24,6 @@ type RootLayoutPropTypes = {
 };
 
 export default function RootLayout({ children }: RootLayoutPropTypes) {
-  //useStartTestServer();
-
   return (
     <html lang="en">
       <head>
