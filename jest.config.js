@@ -38,6 +38,7 @@ module.exports = {
     './src/app',
     './src/hooks',
     './src/mocks',
+    './src/app/__example__',
   ],
   coverageThreshold: {
     '<rootDir>/src/**/*.test.@(js|jsx|ts|tsx)': {
