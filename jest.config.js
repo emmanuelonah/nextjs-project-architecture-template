@@ -1,10 +1,5 @@
 module.exports = {
   collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
-  moduleNameMapper: {
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^.+\\.(css|sass|scss)$': '<rootDir>/mocks/src/style-mock.js',
-    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/src/mocks/file-mock.js',
-  },
   setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   testEnvironment: 'jsdom',
