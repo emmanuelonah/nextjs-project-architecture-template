@@ -36,7 +36,7 @@ class HttpService {
 
   constructor(authRequest = true) {
     this._axiosService = axios.create({
-      baseURL: process.env.YOUR_PROJECT_NAME_API_BASE_URL,
+      baseURL: process.env.NEXT_PUBLIC_YOUR_PROJECT_NAME_API_BASE_URL,
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -66,35 +66,35 @@ class HttpService {
     );
   }
 
-  public httpGetRequest<ResponseType = Record<string, any>, C = any>(url: string, config?: AxiosRequestConfig<C>) {
+  public httpGetRequest<ResponseType = unknown, C = unknown>(url: string, config?: AxiosRequestConfig<C>) {
     return this._axiosService.get<ResponseType>(url, config);
   }
 
-  public httpPostRequest<D = Record<string, string>, ResponseType = any, C = any>(
+  public httpPostRequest<Data = Record<string, unknown>, ResponseType = unknown, Config = unknown>(
     url: string,
-    data: D,
-    config?: AxiosRequestConfig<C extends D ? any : any>
+    data: Data,
+    config?: AxiosRequestConfig<Config extends Data ? any : any>
   ) {
     return this._axiosService.post<ResponseType>(url, data, config);
   }
 
-  public httpPutRequest<D = Record<string, string>, ResponseType = any, C = any>(
+  public httpPutRequest<Data = Record<string, unknown>, ResponseType = unknown, Config = unknown>(
     url: string,
-    data: D,
-    config?: AxiosRequestConfig<C extends D ? any : any>
+    data: Data,
+    config?: AxiosRequestConfig<Config extends Data ? any : any>
   ) {
     return this._axiosService.put<ResponseType>(url, data, config);
   }
 
-  public httpPatchRequest<D = Record<string, string>, ResponseType = any, C = any>(
+  public httpPatchRequest<Data = Record<string, unknown>, ResponseType = unknown, Config = unknown>(
     url: string,
-    data: D,
-    config?: AxiosRequestConfig<C extends D ? any : any>
+    data: Data,
+    config?: AxiosRequestConfig<Config extends Data ? any : any>
   ) {
     return this._axiosService.patch<ResponseType>(url, data, config);
   }
 
-  public httpDeleteRequest<ResponseType = any, C = any>(url: string, config?: AxiosRequestConfig<C>) {
+  public httpDeleteRequest<ResponseType = unknown, Config = unknown>(url: string, config?: AxiosRequestConfig<Config>) {
     return this._axiosService.delete<ResponseType>(url, config);
   }
 }
